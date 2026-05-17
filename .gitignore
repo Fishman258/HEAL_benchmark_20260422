@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+*.so
+
+.Python
+.venv/
+venv/
+env/
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+.DS_Store
+Thumbs.db
+
+# Large local artifacts: keep these outside git and record paths in manifests.
+outputs/
+opencood/logs/
+data/
+dataset/
+
+# Experiment/runtime noise.
+*.log
+*.jsonl
+events.out.tfevents.*
+wandb/
