@@ -23,8 +23,18 @@ Phase 1 is compatibility-first: old paths remain valid.
 - `benchmarks/configs/`: readable YAML configs for benchmark runs.
 - `benchmarks/launchers/run_benchmark_config.py`: converts config files into existing launcher commands.
 - `benchmarks/manifests/paths.yaml`: records dataset/checkpoint/cache paths and whether they are inside or outside this project.
-- `benchmarks/plotting/`: compatibility wrappers for plotting scripts.
-- `benchmarks/profiling/`: profiling notes and future home for profile table/plot generation.
+- `benchmarks/plotting/`: plotting wrappers and OPV2V Benchmark A plot generation.
+- `benchmarks/profiling/`: OPV2V Benchmark A profile table and summary generation.
+
+## Phase-2 Changes
+
+- `scripts/run_opv2v_benchmark_a_profile.py` now focuses on job construction,
+  process execution, command logging, and manifest writing.
+- `benchmarks/profiling/opv2v_benchmark_a.py` owns OPV2V Benchmark A CSV tables,
+  profile summary JSON, communication payload proxy summaries, and timing/memory
+  summaries.
+- `benchmarks/plotting/opv2v_benchmark_a.py` owns OPV2V Benchmark A AP,
+  payload, runtime, and CUDA memory plots.
 
 ## Target Direction
 

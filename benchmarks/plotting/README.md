@@ -1,14 +1,13 @@
 # Plotting
 
-Plotting code is being centralized here. During refactor phase 1, this folder
-contains wrappers around existing plotting scripts rather than moved code.
+Plotting code is being centralized here.
 
 ## Existing Plot Sources
 
 - `opencood/tools/plot_noise_sweep.py`: plots AP curves/heatmaps from
   `AP030507_*.yaml` outputs.
-- `scripts/run_opv2v_benchmark_a_profile.py`: writes Benchmark A AP/profile
-  plots inside each run directory.
+- `benchmarks/plotting/opv2v_benchmark_a.py`: writes OPV2V Benchmark A AP and
+  profiling plots inside each run directory.
 - `scripts/run_pubmap_opv2v_benchmark_ab.py`: writes PubMap A/B plots inside
   each run directory.
 

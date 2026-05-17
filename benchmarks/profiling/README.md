@@ -1,10 +1,16 @@
 # Profiling
 
-Runtime, communication, and memory summaries are currently produced by the
-benchmark launcher itself:
+Runtime, communication, and memory summaries for OPV2V Benchmark A are now
+centralized in:
 
-- `scripts/run_opv2v_benchmark_a_profile.py`
+- `benchmarks/profiling/opv2v_benchmark_a.py`
 
-The next refactor step should move profile table and plot generation from that
-launcher into this directory, after compatibility smoke tests pass.
+The legacy launcher `scripts/run_opv2v_benchmark_a_profile.py` still owns job
+construction and process execution, then calls this module to write:
+
+- `profile_rows.csv`
+- `benchmarkA_points.csv`
+- `profile_overhead_vs_baseline.csv`
+- `profile_summary_full2170.json`
+- `profile_summary.json`
 
