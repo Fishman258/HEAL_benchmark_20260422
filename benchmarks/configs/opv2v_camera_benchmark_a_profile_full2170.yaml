@@ -1,0 +1,36 @@
+# Full OPV2V camera-depth Benchmark A profile run.
+# This mirrors the latest full2170 benchmark configuration.
+schema_version: benchmark_launcher_config_v1
+name: opv2v_camera_benchmark_a_profile_full2170
+launcher: scripts/run_opv2v_benchmark_a_profile.py
+
+args:
+  python-bin: /home/qqxluca/miniconda3/envs/heal/bin/python
+  model-dir: /home/qqxluca/projects/v2xreg_private/HEAL/opencood/logs/opv2v_camera_v2xvit_full_prope
+  stage1-result: /home/qqxluca/HEAL_benchmark_20260422/outputs/image_depth_stage1_cache/run_20260513_191711_opv2v_image_depth_camera_model_fullprope_full2170/test/stage1_boxes_image_depth_camera_model.json
+  test-dir: /data2/OPV2V/test
+  depth-root: /data2/opv2v_depth/test
+
+  # Execution scale. max-eval-samples=0 means full test split.
+  gpus: 0,1,2,3,4,5,6,7,8,9
+  max-parallel: 0
+  max-eval-samples: 0
+  eval-sample-start: 0
+
+  # Benchmark A settings.
+  noises: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  core-noises: [0, 7, 10]
+  oracle-anchor-noise: 9
+  methods: cbm,freealign,v2xregpp,vips
+  bounds: baseline,single,oracle
+
+  # Runtime options.
+  comm-range: 70.0
+  force-pose-confidence: 1.0
+  save-vis-interval: 0
+  num-workers: 0
+  log-interval: 500
+  launch-delay-sec: 1.2
+  poll-sec: 10.0
+  note: opv2v_camera_full2170_config
+

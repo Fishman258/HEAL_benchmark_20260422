@@ -1,0 +1,24 @@
+# PubMap paired OPV2V lidar Benchmark A/B run.
+schema_version: benchmark_launcher_config_v1
+name: pubmap_opv2v_lidar_benchmark_ab
+launcher: scripts/run_pubmap_opv2v_benchmark_ab.py
+
+args:
+  python-bin: /home/qqxluca/miniconda3/envs/heal/bin/python
+  model-dir: /data2/pubmap_full_training/logs/pubmap_full_heal_pointpillar_2026_05_08_16_08_40
+  stage1-result: /data2/pubmap_full_training/stage1_cache/pubmap_pointpillar_bestval51_paired_local_20260509_041950/test/stage1_boxes.json
+  test-dir: /data2/pubmap_full_training/paired_benchmark_inputs/latest_pubmap_paired_opv2v/datasets/heal_pointpillar_opv2v_paired/test
+
+  gpus: 0,1,2,3,4
+  max-eval-samples: 0
+  eval-sample-start: 0
+  noises: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+  comm-range: 70.0
+  comm-range-gating: clean
+  save-vis-interval: 0
+  num-workers: 0
+  log-interval: 200
+  launch-delay-sec: 1.2
+  note: pubmap_opv2v_ab_config
+

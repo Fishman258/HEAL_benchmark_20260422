@@ -1,0 +1,60 @@
+# Source-of-truth path record for current benchmark assets.
+# Large datasets/checkpoints should remain outside git and be referenced here.
+schema_version: benchmark_paths_manifest_v1
+workspace_root: /home/qqxluca/HEAL_benchmark_20260422
+
+datasets:
+  opv2v_test:
+    path: /data2/OPV2V/test
+    location: external
+    approx_size: 32G
+    purpose: OPV2V test split used by camera-depth benchmark.
+  opv2v_depth_test:
+    path: /data2/opv2v_depth/test
+    location: external
+    approx_size: 43G
+    purpose: Depth maps used by camera-depth stage1 export and benchmark.
+  dair_v2x_link:
+    path: /home/qqxluca/HEAL_benchmark_20260422/dataset/my_dair_v2x/v2x_c/cooperative-vehicle-infrastructure
+    location: project_symlink
+    target: /mnt/data2_proxy/DAIR-V2X-C/cooperative-vehicle-infrastructure
+    purpose: DAIR-V2X-C data entry.
+  pubmap_full_training:
+    path: /data2/pubmap_full_training
+    location: external
+    approx_size: 657G
+    purpose: PubMap training, converted inputs, logs, and stage1 caches.
+
+checkpoints:
+  opv2v_camera_v2xvit_full_prope:
+    path: /home/qqxluca/projects/v2xreg_private/HEAL/opencood/logs/opv2v_camera_v2xvit_full_prope
+    location: external
+    purpose: Model directory used by latest OPV2V camera benchmark.
+    note: Verify that a loadable net_epoch*.pth exists at the model_dir level before full runs.
+  dair_lidar_v2xvit:
+    path: /home/qqxluca/HEAL_benchmark_20260422/opencood/logs/HeterBaseline_DAIR_lidar_v2xvit_2023_09_09_11_19_26
+    location: project_ignored
+    purpose: DAIR lidar V2X-ViT checkpoint/config.
+  pubmap_pointpillar:
+    path: /data2/pubmap_full_training/logs/pubmap_full_heal_pointpillar_2026_05_08_16_08_40
+    location: external
+    purpose: PubMap PointPillar model directory.
+
+stage1_cache:
+  opv2v_image_depth_camera_full2170:
+    path: /home/qqxluca/HEAL_benchmark_20260422/outputs/image_depth_stage1_cache/run_20260513_191711_opv2v_image_depth_camera_model_fullprope_full2170/test/stage1_boxes_image_depth_camera_model.json
+    location: project_ignored
+    samples: 2170
+    modality: camera_depth
+    purpose: Stage1 boxes for OPV2V camera-depth benchmark.
+  dair_lidar_v2xvit_percav:
+    path: /home/qqxluca/HEAL_benchmark_20260422/opencood/logs/lidar_v2xvit_stage1_percav_test/stage1_boxes.json
+    location: project_ignored
+    modality: lidar
+    purpose: DAIR lidar stage1 boxes.
+  pubmap_pointpillar_paired:
+    path: /data2/pubmap_full_training/stage1_cache/pubmap_pointpillar_bestval51_paired_local_20260509_041950/test/stage1_boxes.json
+    location: external
+    modality: lidar
+    purpose: PubMap paired OPV2V benchmark stage1 boxes.
+
