@@ -97,8 +97,8 @@ def _compute_match_stats(src_boxes, dst_boxes, T_rel: np.ndarray, *, bbox_type: 
         from opencood.extrinsics.path_utils import ensure_v2xreg_root_on_path
 
         ensure_v2xreg_root_on_path()
-        from v2x_calib.utils import implement_T_3dbox_object_list  # type: ignore
-        from v2x_calib.corresponding import CorrespondingDetector  # type: ignore
+        from opencood.extrinsics.pose_estimation.v2x_calib.utils import implement_T_3dbox_object_list  # type: ignore
+        from opencood.extrinsics.pose_estimation.v2x_calib.corresponding import CorrespondingDetector  # type: ignore
     except Exception:
         return None, None
 

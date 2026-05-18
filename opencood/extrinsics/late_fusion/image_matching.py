@@ -487,7 +487,7 @@ class ImageMatchingEstimator:
         RE = TE = None
         if ctx.T_true is not None:
             try:
-                from v2x_calib.utils import convert_T_to_6DOF, get_RE_TE_by_compare_T_6DOF_result_true
+                from opencood.extrinsics.pose_estimation.v2x_calib.utils import convert_T_to_6DOF, get_RE_TE_by_compare_T_6DOF_result_true
 
                 RE, TE = get_RE_TE_by_compare_T_6DOF_result_true(
                     convert_T_to_6DOF(T), convert_T_to_6DOF(ctx.T_true)

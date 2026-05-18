@@ -1,11 +1,8 @@
-import sys
-from pathlib import Path
 import numpy as np
 try:
     import torch
 except Exception:  # pragma: no cover - torch optional
     torch = None
-sys.path.append(str(Path(__file__).parent.parent))
 from ..utils import (
     get_extrinsic_from_two_3dbox_object,
     get_extrinsic_from_two_points,

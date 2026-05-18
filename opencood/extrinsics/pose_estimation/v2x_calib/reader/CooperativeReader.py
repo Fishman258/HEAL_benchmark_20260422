@@ -1,7 +1,5 @@
 import os.path as osp
-import sys
 from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent))
 from ..utils import implement_R_t_points_n_3, convert_Rt_to_T
 import numpy as np
 from .read_utils import read_json

@@ -1,8 +1,5 @@
 import os.path as osp
 # import cv2
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent))
 import numpy as np
 from .Reader import Reader
 from .read_utils import read_json

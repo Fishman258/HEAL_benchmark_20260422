@@ -28,7 +28,7 @@ class V2XRegPPEstimator:
         device: Optional[str] = None,
     ) -> None:
         ensure_v2xreg_root_on_path()
-        from calib.config import load_config  # type: ignore
+        from opencood.extrinsics.pose_estimation.calib.config import load_config  # type: ignore
 
         cfg_path = resolve_repo_path(config_path)
         self._cfg = load_config(str(cfg_path))
@@ -36,8 +36,8 @@ class V2XRegPPEstimator:
             for key, value in matching_overrides.items():
                 setattr(self._cfg.matching, key, value)
 
-        from calib.filters.pipeline import FilterPipeline  # type: ignore
-        from calib.matching.engine import MatchingEngine  # type: ignore
+        from opencood.extrinsics.pose_estimation.calib.filters.pipeline import FilterPipeline  # type: ignore
+        from opencood.extrinsics.pose_estimation.calib.matching.engine import MatchingEngine  # type: ignore
 
         self._filters = FilterPipeline(self._cfg.filters)
         self._device = device
@@ -71,8 +71,8 @@ class V2XRegPPEstimator:
         ctx: Optional[MethodContext] = None,
     ) -> ExtrinsicEstimate:
         ensure_v2xreg_root_on_path()
-        from v2x_calib.search import Matches2Extrinsics  # type: ignore
-        from v2x_calib.utils import (  # type: ignore
+        from opencood.extrinsics.pose_estimation.v2x_calib.search import Matches2Extrinsics  # type: ignore
+        from opencood.extrinsics.pose_estimation.v2x_calib.utils import (  # type: ignore
             convert_6DOF_to_T,
             convert_T_to_6DOF,
             get_RE_TE_by_compare_T_6DOF_result_true,

@@ -147,5 +147,5 @@ if __name__ == "__main__":
     filtered_infra_3dboxes, filered_vehicle_3dboxes = Filter3dBoxes().test_filtered_infra_vehicle_according_to_size_distance_occlusion_truncation()
 
     boxes_color_list = [[1, 0, 0], [0, 1, 0]]
-    from BBoxVisualizer_open3d import BBoxVisualizer_open3d
+    from legacy.visualize import BBoxVisualizer_open3d
     BBoxVisualizer_open3d().plot_boxes3d_lists_pointcloud_lists([filtered_infra_3dboxes, filered_vehicle_3dboxes], [converted_infra_pointcloud, vehicle_pointcloud], boxes_color_list)

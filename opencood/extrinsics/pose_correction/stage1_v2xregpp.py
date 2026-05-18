@@ -342,7 +342,7 @@ def _estimate_occ_hint(
     min_peak_ratio: float,
 ) -> Optional[Dict[str, Any]]:
     ensure_v2xreg_root_on_path()
-    from v2x_calib.utils import convert_6DOF_to_T  # type: ignore
+    from opencood.extrinsics.pose_estimation.v2x_calib.utils import convert_6DOF_to_T  # type: ignore
 
     def _squeeze(raw):
         arr = np.asarray(raw, dtype=np.float32)
@@ -688,9 +688,9 @@ class Stage1V2XRegPPPoseCorrector:
 
     def __post_init__(self) -> None:
         ensure_v2xreg_root_on_path()
-        from calib.config import load_config  # type: ignore
-        from calib.filters.pipeline import FilterPipeline  # type: ignore
-        from calib.matching.engine import MatchingEngine  # type: ignore
+        from opencood.extrinsics.pose_estimation.calib.config import load_config  # type: ignore
+        from opencood.extrinsics.pose_estimation.calib.filters.pipeline import FilterPipeline  # type: ignore
+        from opencood.extrinsics.pose_estimation.calib.matching.engine import MatchingEngine  # type: ignore
 
         cfg_path = resolve_repo_path(self.config_path)
         self._cfg = load_config(str(cfg_path))
@@ -796,9 +796,9 @@ class Stage1V2XRegPPPoseCorrector:
         allow_gate_reject_return: bool = False,
     ) -> Optional[Dict[str, Any]]:
         ensure_v2xreg_root_on_path()
-        from v2x_calib.search import Matches2Extrinsics  # type: ignore
-        from v2x_calib.utils import convert_6DOF_to_T, implement_T_3dbox_object_list  # type: ignore
-        from v2x_calib.corresponding import CorrespondingDetector  # type: ignore
+        from opencood.extrinsics.pose_estimation.v2x_calib.search import Matches2Extrinsics  # type: ignore
+        from opencood.extrinsics.pose_estimation.v2x_calib.utils import convert_6DOF_to_T, implement_T_3dbox_object_list  # type: ignore
+        from opencood.extrinsics.pose_estimation.v2x_calib.corresponding import CorrespondingDetector  # type: ignore
 
         filtered_src, filtered_dst = self._filters.apply(src_boxes or [], dst_boxes or [])
         has_boxes = bool(filtered_src) and bool(filtered_dst)

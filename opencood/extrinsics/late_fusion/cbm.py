@@ -50,7 +50,7 @@ class CBMEstimator:
             return self._matcher
         ensure_v2xreg_root_on_path()
         try:
-            from v2x_calib.corresponding.CBM_torch import CBM as CBMMatcher  # type: ignore
+            from opencood.extrinsics.pose_estimation.v2x_calib.corresponding.CBM_torch import CBM as CBMMatcher  # type: ignore
         except ModuleNotFoundError as exc:
             raise RuntimeError(
                 "CBMEstimator requires PyTorch; please install `torch` in your runtime environment."
@@ -148,7 +148,7 @@ class CBMEstimator:
         RE = TE = None
         if ctx.T_true is not None:
             ensure_v2xreg_root_on_path()
-            from v2x_calib.utils import convert_T_to_6DOF, get_RE_TE_by_compare_T_6DOF_result_true  # type: ignore
+            from opencood.extrinsics.pose_estimation.v2x_calib.utils import convert_T_to_6DOF, get_RE_TE_by_compare_T_6DOF_result_true  # type: ignore
 
             RE, TE = get_RE_TE_by_compare_T_6DOF_result_true(convert_T_to_6DOF(T), convert_T_to_6DOF(ctx.T_true))
 

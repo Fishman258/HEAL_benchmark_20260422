@@ -34,7 +34,7 @@ def corners_to_bbox3d_list(
     Convert `(N, 8, 3)` corners into `BBox3d` objects from `v2x_calib`.
     """
     ensure_v2xreg_root_on_path()
-    from v2x_calib.reader.BBox3d import BBox3d  # type: ignore
+    from opencood.extrinsics.pose_estimation.v2x_calib.reader.BBox3d import BBox3d  # type: ignore
 
     corners_np = _as_numpy(corners)
     if corners_np is None:

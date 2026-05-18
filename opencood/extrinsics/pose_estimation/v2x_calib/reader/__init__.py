@@ -1,6 +1,3 @@
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).parent))
 from .BBox3d import BBox3d
 from .CooperativeBatchingReader import CooperativeBatchingReader
 from .CooperativeReader import CooperativeReader

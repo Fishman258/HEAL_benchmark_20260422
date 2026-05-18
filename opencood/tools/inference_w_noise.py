@@ -806,7 +806,7 @@ def test_parser():
     parser.add_argument(
         "--v2xregpp-config",
         type=str,
-        default="configs/dair/midfusion/pipeline_midfusion_detection_occ.yaml",
+        default="opencood/extrinsics/pose_estimation/configs/dair/midfusion/pipeline_midfusion_detection_occ.yaml",
         help="V2X-Reg++ pipeline config used by the pose corrector.",
     )
     parser.add_argument(

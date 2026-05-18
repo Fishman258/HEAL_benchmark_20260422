@@ -5,11 +5,8 @@ try:
     import open3d as o3d
 except Exception:
     o3d = None
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent))
 from ..utils import get_bbox3d_8_3_from_xyz_lwh_yaw
-from configs.legacy_api import cfg
+from opencood.extrinsics.pose_estimation.configs.legacy_api import cfg
 from .read_utils import read_json
 from .BBox3d import BBox3d
 

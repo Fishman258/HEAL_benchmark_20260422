@@ -6,10 +6,6 @@ from collections import OrderedDict
 import pickle
 import numpy as np
 import signal
-import sys
-from pathlib import Path
-sys.path.append(str(Path(__file__).parent.parent.parent))
-sys.path.append(str(Path(__file__).parent.parent))
 from ..utils import (
     implement_T_3dbox_object_list,
     convert_T_to_6DOF,
@@ -18,14 +14,14 @@ from ..utils import (
     implement_T_to_3dbox_with_own_center,
 )
 from .BBox3d import BBox3d
-import noise_utils
+from . import noise_utils
 import json
 from scipy.spatial.transform import Rotation as R
 try:
-    from visualize import BBoxVisualizer_open3d
+    from legacy.visualize import BBoxVisualizer_open3d
 except ImportError:  # pragma: no cover - optional dependency for debugging
     BBoxVisualizer_open3d = None
-# from visualize import BBoxVisualizer_open3d_standardized
+# from legacy.visualize import BBoxVisualizer_open3d_standardized
 
 
 

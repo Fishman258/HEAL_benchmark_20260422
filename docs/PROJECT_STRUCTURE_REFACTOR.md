@@ -36,6 +36,25 @@ Phase 1 is compatibility-first: old paths remain valid.
 - `benchmarks/plotting/opv2v_benchmark_a.py` owns OPV2V Benchmark A AP,
   payload, runtime, and CUDA memory plots.
 
+## Phase-3 Pose Estimation Integration
+
+- `opencood/extrinsics/pose_estimation/` is now the canonical home for old
+  pose-estimation and calibration code.
+- `opencood/extrinsics/pose_estimation/calib/` contains the pipeline config
+  loader, box filtering, and matching engine used by V2X-Reg++ style pose
+  correction.
+- `opencood/extrinsics/pose_estimation/v2x_calib/` contains the migrated
+  box readers, correspondence search, matching, SVD transform solving, and
+  bbox geometry utilities.
+- `opencood/extrinsics/pose_estimation/configs/` contains pose-estimation
+  YAML configs. The default V2X-Reg++ config used by
+  `opencood/tools/inference_w_noise.py` now points here.
+- Root-level `calib/`, root-level `v2x_calib/`, and `legacy/v2x_calib/` are
+  compatibility shims. They should keep old imports working but should not be
+  the target for new code.
+- Root-level `configs/dair/midfusion/pipeline_midfusion_detection_occ.yaml`
+  is a compatibility pointer to the new config location.
+
 ## Target Direction
 
 Use this target structure for future cleanup:
@@ -43,6 +62,8 @@ Use this target structure for future cleanup:
 ```text
 HEAL_benchmark_20260422/
   opencood/                 # library/runtime/model code only
+    extrinsics/
+      pose_estimation/      # migrated calibration and pose-estimation code
   benchmarks/
     configs/                # benchmark configs
     launchers/              # benchmark launchers
