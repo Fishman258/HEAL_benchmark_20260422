@@ -87,7 +87,7 @@ def getIntermediateFusionDataset(cls):
             )
             if self.pose_override_path:
                 try:
-                    from opencood.extrinsics.path_utils import resolve_repo_path
+                    from opencood.utils.path_utils import resolve_repo_path
 
                     self.pose_override_path = str(resolve_repo_path(self.pose_override_path))
                 except Exception:

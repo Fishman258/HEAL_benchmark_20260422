@@ -56,20 +56,20 @@ opencood/tools/inference_w_noise.py::main
       -> opencood/data_utils/datasets/intermediate_heter_fusion_dataset.py::getIntermediateheterFusionDataset
       -> opencood/data_utils/datasets/intermediate_heter_fusion_dataset.py::__init__
           -> opencood/data_utils/post_processor/voxel_postprocessor.py::generate_anchor_box
-  -> opencood/extrinsics/pose_correction/pose_solver.py::build_pose_corrector
-      -> opencood/extrinsics/pose_correction/stage1_v2xregpp.py::Stage1V2XRegPPPoseCorrector
-  -> opencood/extrinsics/pose_correction/pose_solver.py::run_pose_solver
+  -> opencood/registration/runtime/pose_solver.py::build_pose_corrector
+      -> opencood/registration/runtime/stage1_v2xregpp.py::Stage1V2XRegPPPoseCorrector
+  -> opencood/registration/runtime/pose_solver.py::run_pose_solver
       -> opencood/data_utils/datasets/basedataset/dairv2x_basedataset.py::retrieve_base_data
-      -> opencood/extrinsics/pose_correction/stage1_v2xregpp.py::apply
-          -> opencood/extrinsics/pose_correction/stage1_v2xregpp.py::_extract_boxes
-              -> opencood/extrinsics/bbox_utils.py::corners_to_bbox3d_list
-          -> opencood/extrinsics/pose_correction/stage1_v2xregpp.py::_estimate_rel_T
-              -> calib/filters/pipeline.py::apply
-              -> calib/matching/engine.py::compute
-                  -> legacy/v2x_calib/corresponding/BoxesMatch.py::get_matches_with_score
-                  -> legacy/v2x_calib/corresponding/BoxesMatch.py::get_stability
-          -> opencood/extrinsics/pose_correction/stage1_v2xregpp.py::_quality
-              -> legacy/v2x_calib/search/Matches2Extrinsics.py::get_combined_extrinsic
+      -> opencood/registration/runtime/stage1_v2xregpp.py::apply
+          -> opencood/registration/runtime/stage1_v2xregpp.py::_extract_boxes
+              -> opencood/registration/utils/bbox.py::corners_to_bbox3d_list
+          -> opencood/registration/runtime/stage1_v2xregpp.py::_estimate_rel_T
+              -> opencood/registration/estimators/v2xregpp_runtime/filters/pipeline.py::apply
+              -> opencood/registration/estimators/v2xregpp_runtime/matching/engine.py::compute
+                  -> opencood/registration/estimators/box_matching/boxes_match.py::get_matches_with_score
+                  -> opencood/registration/estimators/box_matching/boxes_match.py::get_stability
+          -> opencood/registration/runtime/stage1_v2xregpp.py::_quality
+              -> opencood/registration/estimators/v2xregpp_runtime/matches_to_extrinsics.py::get_combined_extrinsic
   -> opencood/tools/train_utils.py::to_device
   -> opencood/tools/train_utils.py::maybe_apply_pose_provider
   -> opencood/tools/inference_utils.py::inference_intermediate_fusion
@@ -106,13 +106,14 @@ The full list is in `.trace_smoke_v2xregpp.json`. For this successful path, the 
   - `opencood/data_utils/post_processor/base_postprocessor.py`
   - `opencood/data_utils/post_processor/voxel_postprocessor.py`
 - Pose correction (`v2x-reg++` path):
-  - `opencood/extrinsics/pose_correction/pose_solver.py`
-  - `opencood/extrinsics/pose_correction/stage1_v2xregpp.py`
-  - `opencood/extrinsics/bbox_utils.py`
-  - `calib/config.py`
-  - `calib/filters/pipeline.py`
-  - `calib/matching/engine.py`
-  - multiple `legacy/v2x_calib/*` files for box matching and extrinsic solving
+  - `opencood/registration/runtime/pose_solver.py`
+  - `opencood/registration/runtime/stage1_v2xregpp.py`
+  - `opencood/registration/utils/bbox.py`
+  - `opencood/registration/estimators/v2xregpp_runtime/config.py`
+  - `opencood/registration/estimators/v2xregpp_runtime/filters/pipeline.py`
+  - `opencood/registration/estimators/v2xregpp_runtime/matching/engine.py`
+  - `opencood/registration/estimators/box_matching/*`
+  - `opencood/registration/estimators/v2xregpp_runtime/matches_to_extrinsics.py`
 - Shared utilities used heavily:
   - `opencood/utils/common_utils.py`
   - `opencood/utils/box_utils.py`
@@ -130,7 +131,7 @@ The trace includes both:
 - files on the core runtime path above, and
 - files loaded only because some package `__init__.py` or registry-style import pulled in alternative datasets, post-processors, or pose-correction methods.
 
-For example, the trace records many files under `opencood/data_utils/datasets/`, `opencood/data_utils/post_processor/`, and `opencood/extrinsics/pose_correction/`, but the smoke run's actual main path is much narrower than the raw 142-file list.
+For example, the trace records many files under `opencood/data_utils/datasets/`, `opencood/data_utils/post_processor/`, and `opencood/registration/runtime/`, but the smoke run's actual main path is much narrower than the raw 142-file list.
 
 Within `opencood/tools/`, only these files were loaded in this smoke run:
 

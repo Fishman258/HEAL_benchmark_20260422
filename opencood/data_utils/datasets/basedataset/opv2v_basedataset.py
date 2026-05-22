@@ -104,7 +104,7 @@ class OPV2VBaseDataset(Dataset):
             # Unknown type; ignore for backward compatibility.
             return set()
 
-        from opencood.extrinsics.path_utils import resolve_repo_path
+        from opencood.utils.path_utils import resolve_repo_path
 
         path = str(resolve_repo_path(spec))
         if path.endswith(".json"):

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Run an existing benchmark launcher from a YAML/JSON config.
 
-This is a compatibility layer: it converts a readable config file into the
-same CLI arguments consumed by the current scripts under `scripts/`.
+This converts a readable config file into the CLI arguments consumed by the
+benchmark launchers under `benchmarks/launchers/`.
 """
 
 import argparse
@@ -161,4 +161,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

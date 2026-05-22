@@ -63,26 +63,26 @@ opencood/tools/inference_w_noise.py::main
       -> opencood/data_utils/datasets/intermediate_heter_fusion_dataset.py::getIntermediateheterFusionDataset
       -> opencood/data_utils/datasets/intermediate_heter_fusion_dataset.py::__init__
           -> opencood/data_utils/post_processor/voxel_postprocessor.py::generate_anchor_box
-  -> opencood/extrinsics/pose_correction/pose_solver.py::build_pose_corrector
-      -> opencood/extrinsics/pose_correction/stage1_v2xregpp.py::Stage1V2XRegPPPoseCorrector
-  -> opencood/extrinsics/pose_correction/pose_solver.py::run_pose_solver
+  -> opencood/registration/runtime/pose_solver.py::build_pose_corrector
+      -> opencood/registration/runtime/stage1_v2xregpp.py::Stage1V2XRegPPPoseCorrector
+  -> opencood/registration/runtime/pose_solver.py::run_pose_solver
       -> opencood/data_utils/datasets/basedataset/dairv2x_basedataset.py::retrieve_base_data
       -> opencood/utils/pose_utils.py::add_noise_data_dict
       -> opencood/utils/pose_utils.py::attach_pose_confidence
-      -> opencood/extrinsics/pose_correction/stage1_v2xregpp.py::apply
-          -> opencood/extrinsics/pose_correction/stage1_v2xregpp.py::_extract_boxes
-              -> opencood/extrinsics/bbox_utils.py::corners_to_bbox3d_list
-          -> opencood/extrinsics/pose_correction/stage1_v2xregpp.py::_estimate_rel_T
-              -> calib/filters/pipeline.py::apply
-              -> calib/matching/engine.py::compute
-                  -> legacy/v2x_calib/corresponding/BoxesMatch.py::get_matches_with_score
-                  -> legacy/v2x_calib/corresponding/BoxesMatch.py::get_stability
-          -> opencood/extrinsics/pose_correction/stage1_v2xregpp.py::_quality
-              -> legacy/v2x_calib/corresponding/CorrespondingDetector.py::get_distance_corresponding_precision
-              -> legacy/v2x_calib/search/Matches2Extrinsics.py::get_combined_extrinsic
+      -> opencood/registration/runtime/stage1_v2xregpp.py::apply
+          -> opencood/registration/runtime/stage1_v2xregpp.py::_extract_boxes
+              -> opencood/registration/utils/bbox.py::corners_to_bbox3d_list
+          -> opencood/registration/runtime/stage1_v2xregpp.py::_estimate_rel_T
+              -> opencood/registration/estimators/v2xregpp_runtime/filters/pipeline.py::apply
+              -> opencood/registration/estimators/v2xregpp_runtime/matching/engine.py::compute
+                  -> opencood/registration/estimators/box_matching/boxes_match.py::get_matches_with_score
+                  -> opencood/registration/estimators/box_matching/boxes_match.py::get_stability
+          -> opencood/registration/runtime/stage1_v2xregpp.py::_quality
+              -> opencood/registration/estimators/box_matching/corresponding_detector.py::get_distance_corresponding_precision
+              -> opencood/registration/estimators/v2xregpp_runtime/matches_to_extrinsics.py::get_combined_extrinsic
   -> opencood/tools/train_utils.py::to_device
   -> opencood/tools/train_utils.py::maybe_apply_pose_provider
-      -> opencood/utils/pose_provider_runtime.py::from_hypes
+      -> opencood/registration/runtime/pose_provider_runtime.py::from_hypes
   -> opencood/tools/inference_utils.py::inference_intermediate_fusion
       -> opencood/tools/inference_utils.py::inference_early_fusion
           -> model(...)

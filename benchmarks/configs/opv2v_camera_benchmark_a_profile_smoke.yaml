@@ -2,7 +2,7 @@
 # It exercises the full benchmark chain with a tiny sample count.
 schema_version: benchmark_launcher_config_v1
 name: opv2v_camera_benchmark_a_profile_smoke
-launcher: scripts/run_opv2v_benchmark_a_profile.py
+launcher: benchmarks/launchers/run_opv2v_benchmark_a_profile.py
 
 args:
   python-bin: /home/qqxluca/miniconda3/envs/heal/bin/python
@@ -33,4 +33,3 @@ args:
   launch-delay-sec: 0.2
   poll-sec: 2.0
   note: refactor_phase1_smoke
-

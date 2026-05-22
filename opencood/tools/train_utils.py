@@ -11,7 +11,7 @@ from datetime import datetime
 import shutil
 import torch
 
-from opencood.utils.pose_provider_runtime import PoseProviderConfig, apply_pose_provider
+from opencood.registration.runtime.pose_provider_runtime import PoseProviderConfig, apply_pose_provider
 import torch.optim as optim
 
 def backup_script(full_path, folders_to_save=["models", "data_utils", "utils", "loss"]):

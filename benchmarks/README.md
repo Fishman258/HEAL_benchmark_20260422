@@ -1,13 +1,13 @@
 # Benchmark Layout
 
-This directory is the new, low-risk benchmark layer. It does not replace the
-legacy entry points yet. Existing scripts under `scripts/` and
-`opencood/tools/` remain valid.
+This directory is the benchmark layer. `opencood/tools/` remains the low-level
+OpenCOOD execution layer.
 
 ## Directory Roles
 
 - `configs/`: human-readable benchmark run configs.
-- `launchers/`: config-driven launchers and compatibility wrappers.
+- `data_prep/`: benchmark-specific input and stage1 cache preparation.
+- `launchers/`: config-driven benchmark launchers and job orchestration.
 - `manifests/`: dataset, checkpoint, and stage1 cache path records.
 - `plotting/`: plotting wrappers and future centralized plot code.
 - `profiling/`: profiling notes and future centralized profile code.
@@ -37,11 +37,11 @@ python benchmarks/launchers/run_benchmark_config.py \
   --dry-run
 ```
 
-## Compatibility Rule
-
-During refactor phase 1, do not delete or move these existing entry points:
+## Entry Points
 
 - `opencood/tools/inference_w_noise.py`
-- `scripts/run_opv2v_benchmark_a_profile.py`
-- `scripts/run_pubmap_opv2v_benchmark_ab.py`
-- `scripts/run_benchmark_ab_local.py`
+- `benchmarks/data_prep/build_pubmap_paired_opv2v_inputs.py`
+- `benchmarks/data_prep/run_pubmap_paired_stage1_export.py`
+- `benchmarks/launchers/run_benchmark_ab_local.py`
+- `benchmarks/launchers/run_opv2v_benchmark_a_profile.py`
+- `benchmarks/launchers/run_pubmap_opv2v_benchmark_ab.py`

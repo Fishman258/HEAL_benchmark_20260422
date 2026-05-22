@@ -74,7 +74,7 @@ def getIntermediateheterFusionDataset(cls):
                 resolved_path = assignment_path
                 if not os.path.isabs(str(assignment_path)):
                     try:
-                        from opencood.extrinsics.path_utils import resolve_repo_path
+                        from opencood.utils.path_utils import resolve_repo_path
 
                         resolved_path = str(resolve_repo_path(str(assignment_path)))
                         if not os.path.exists(resolved_path):
@@ -150,7 +150,7 @@ def getIntermediateheterFusionDataset(cls):
             )
             if self.pose_override_path:
                 try:
-                    from opencood.extrinsics.path_utils import resolve_repo_path
+                    from opencood.utils.path_utils import resolve_repo_path
 
                     self.pose_override_path = str(resolve_repo_path(self.pose_override_path))
                 except Exception:

@@ -18,9 +18,9 @@ from torch.utils.data import DataLoader
 import numpy as np
 
 import opencood.hypes_yaml.yaml_utils as yaml_utils
-from opencood.extrinsics.path_utils import resolve_repo_path
-from opencood.extrinsics.pose_correction.selection_policy import normalize_pose_selection_policy
-from opencood.extrinsics.pose_correction import build_pose_corrector, run_pose_solver
+from opencood.utils.path_utils import resolve_repo_path
+from opencood.registration.runtime.selection_policy import normalize_pose_selection_policy
+from opencood.registration.runtime import build_pose_corrector, run_pose_solver
 from opencood.tools import train_utils, inference_utils
 from opencood.data_utils.datasets import build_dataset
 from opencood.utils import eval_utils
@@ -806,7 +806,7 @@ def test_parser():
     parser.add_argument(
         "--v2xregpp-config",
         type=str,
-        default="opencood/extrinsics/pose_estimation/configs/dair/midfusion/pipeline_midfusion_detection_occ.yaml",
+        default="opencood/registration/estimators/v2xregpp_runtime/configs/dair/midfusion/pipeline_midfusion_detection_occ.yaml",
         help="V2X-Reg++ pipeline config used by the pose corrector.",
     )
     parser.add_argument(

@@ -2,7 +2,7 @@
 # This mirrors the latest full2170 benchmark configuration.
 schema_version: benchmark_launcher_config_v1
 name: opv2v_camera_benchmark_a_profile_full2170
-launcher: scripts/run_opv2v_benchmark_a_profile.py
+launcher: benchmarks/launchers/run_opv2v_benchmark_a_profile.py
 
 args:
   python-bin: /home/qqxluca/miniconda3/envs/heal/bin/python
@@ -33,4 +33,3 @@ args:
   launch-delay-sec: 1.2
   poll-sec: 10.0
   note: opv2v_camera_full2170_config
-

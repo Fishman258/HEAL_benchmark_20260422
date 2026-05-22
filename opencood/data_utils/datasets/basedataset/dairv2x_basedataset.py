@@ -85,7 +85,7 @@ class DAIRV2XBaseDataset(Dataset):
                         data_info_path = candidate
             if not os.path.isabs(str(data_info_path)):
                 try:
-                    from opencood.extrinsics.path_utils import resolve_repo_path
+                    from opencood.utils.path_utils import resolve_repo_path
 
                     resolved = resolve_repo_path(str(data_info_path))
                     if resolved.exists():

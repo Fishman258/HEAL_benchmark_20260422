@@ -4,7 +4,9 @@ Benchmark workspace initialized on 2026-04-22.
 
 ## Included
 
-- `opencood/tools/inference_w_noise.py` as the benchmark entrypoint
+- `benchmarks/` as the benchmark configuration, launcher, plotting, profiling,
+  and data-preparation layer
+- `opencood/tools/inference_w_noise.py` as the low-level benchmark executor
 - `opencood/` codebase required by `opencood/tools/inference_w_noise.py`
 - minimal `opencood/tools/` runtime subset:
   - `__init__.py`
@@ -17,7 +19,6 @@ Benchmark workspace initialized on 2026-04-22.
 - local stage1 cache:
   - `opencood/logs/freealign_repro_dair_stage1/merged_stage1_val.json`
 - `dataset/` copied with symlinks preserved
-- `calib/`, `v2x_calib/`, `legacy/`, `configs/`
 - `requirements.txt`, `setup.py`
 - backup archive for removed tool scripts:
   - `_backup/opencood_tools_before_cleanup_20260422.tar.gz`
@@ -31,6 +32,11 @@ Benchmark workspace initialized on 2026-04-22.
 - large detection caches under the original top-level `data/`
 
 This workspace now contains the specific checkpoint directory and stage1 cache needed for the local `inference_w_noise.py` smoke path, but it still does not include the broader original training-log / cache inventory.
+
+Legacy root-level compatibility folders such as `scripts/`, `tools/`, `calib/`,
+`v2x_calib/`, `configs/`, and `legacy/` have been removed. Use the canonical
+paths under `benchmarks/`, `opencood/registration/estimators/`, and
+`opencood/registration/runtime/` instead.
 
 ## Git
 

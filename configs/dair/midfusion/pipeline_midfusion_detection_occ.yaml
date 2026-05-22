@@ -1,6 +1,0 @@
-# Compatibility pointer.
-# The active v2xregpp pose-estimation config moved to:
-# opencood/extrinsics/pose_estimation/configs/dair/midfusion/pipeline_midfusion_detection_occ.yaml
-#
-# Keep this file only so old command notes and paths remain discoverable.
-_MOVED_TO_: opencood/extrinsics/pose_estimation/configs/dair/midfusion/pipeline_midfusion_detection_occ.yaml
