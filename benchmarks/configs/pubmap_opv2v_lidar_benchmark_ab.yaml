@@ -1,23 +1,62 @@
-# PubMap paired OPV2V lidar Benchmark A/B run.
-schema_version: benchmark_launcher_config_v1
+# PubMap paired OPV2V lidar Benchmark A/B run through the staged pipeline.
+schema_version: benchmark_pipeline_config_v1
 name: pubmap_opv2v_lidar_benchmark_ab
-launcher: benchmarks/launchers/run_pubmap_opv2v_benchmark_ab.py
+note: pubmap_opv2v_ab_config
+output_root: outputs/pipelines
 
-args:
-  python-bin: /home/qqxluca/miniconda3/envs/heal/bin/python
-  model-dir: /data2/pubmap_full_training/logs/pubmap_full_heal_pointpillar_2026_05_08_16_08_40
-  stage1-result: /data2/pubmap_full_training/stage1_cache/pubmap_pointpillar_bestval51_paired_local_20260509_041950/test/stage1_boxes.json
-  test-dir: /data2/pubmap_full_training/paired_benchmark_inputs/latest_pubmap_paired_opv2v/datasets/heal_pointpillar_opv2v_paired/test
+stages:
+  detection:
+    enabled: true
+    mode: existing_stage1
+    stage1_result: /data2/pubmap_full_training/stage1_cache/pubmap_pointpillar_bestval51_paired_local_20260509_041950/test/stage1_boxes.json
+    detector: pubmap_pointpillar_bestval51
+    modality: lidar
 
-  gpus: 0,1,2,3,4
-  max-eval-samples: 0
-  eval-sample-start: 0
-  noises: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  benchmark:
+    enabled: true
+    mode: pubmap_opv2v_benchmark_ab
+    python_bin: /home/qqxluca/miniconda3/envs/heal/bin/python
+    note: pubmap_opv2v_ab_config
+    inputs:
+      model_dir: /home/qqxluca/HEAL_benchmark_20260422/opencood/fusion/checkpoints/pubmap_full_heal_pointpillar_2026_05_08_16_08_40
+      test_dir: /data2/pubmap_full_training/paired_benchmark_inputs/latest_pubmap_paired_opv2v/datasets/heal_pointpillar_opv2v_paired/test
+    benchmark:
+      include_bounds: true
+      include_core: true
+      include_init: true
+    execution:
+      gpus: 0,1,2,3,4
+      max_parallel: 0
+      launch_delay_sec: 1.2
+      poll_sec: 10.0
+      abort_on_failure: true
+    sweep:
+      noises: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    inference:
+      fusion_method: late
+      max_cav_override: 2
+      save_vis_interval: 0
+      num_workers: 0
+      max_eval_samples: 0
+      eval_sample_start: 0
+      comm_range: 70.0
+      comm_range_gating: clean
+      pose_device: cuda
+      log_interval: 200
 
-  comm-range: 70.0
-  comm-range-gating: clean
-  save-vis-interval: 0
-  num-workers: 0
-  log-interval: 200
-  launch-delay-sec: 1.2
-  note: pubmap_opv2v_ab_config
+  registration:
+    enabled: false
+    mode: skip
+
+  fusion:
+    enabled: false
+    mode: skip
+
+  evaluation:
+    enabled: true
+    mode: collect_existing_artifacts
+    include_stage_output_dirs: true
+    search_roots: []
+    patterns:
+      - AP030507_*.yaml
+      - benchmark_summary.json

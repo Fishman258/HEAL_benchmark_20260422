@@ -12,8 +12,8 @@ from torch.utils.data import Dataset
 from opencood.data_utils.augmentor.data_augmentor import DataAugmentor
 from opencood.utils.common_utils import read_json
 from opencood.utils.transformation_utils import tfm_to_pose
-from opencood.data_utils.pre_processor import build_preprocessor
-from opencood.data_utils.post_processor import build_postprocessor
+from opencood.detection.preprocessing import build_preprocessor
+from opencood.detection.postprocessing import build_postprocessor
 
 class V2XSIMBaseDataset(Dataset):
     """

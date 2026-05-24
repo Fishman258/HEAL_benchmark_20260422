@@ -1,35 +1,65 @@
-# Smoke version of the OPV2V camera-depth Benchmark A profile run.
-# It exercises the full benchmark chain with a tiny sample count.
-schema_version: benchmark_launcher_config_v1
+# Smoke OPV2V camera-depth Benchmark A run through the staged pipeline.
+schema_version: benchmark_pipeline_config_v1
 name: opv2v_camera_benchmark_a_profile_smoke
-launcher: benchmarks/launchers/run_opv2v_benchmark_a_profile.py
+note: refactor_phase1_smoke
+output_root: outputs/pipelines
 
-args:
-  python-bin: /home/qqxluca/miniconda3/envs/heal/bin/python
-  model-dir: /home/qqxluca/projects/v2xreg_private/HEAL/opencood/logs/opv2v_camera_v2xvit_full_prope
-  stage1-result: /home/qqxluca/HEAL_benchmark_20260422/outputs/image_depth_stage1_cache/run_20260513_191711_opv2v_image_depth_camera_model_fullprope_full2170/test/stage1_boxes_image_depth_camera_model.json
-  test-dir: /data2/OPV2V/test
-  depth-root: /data2/opv2v_depth/test
+stages:
+  detection:
+    enabled: true
+    mode: existing_stage1
+    stage1_result: /home/qqxluca/HEAL_benchmark_20260422/outputs/image_depth_stage1_cache/run_20260513_191711_opv2v_image_depth_camera_model_fullprope_full2170/test/stage1_boxes_image_depth_camera_model.json
+    detector: image_depth_camera_model
+    modality: camera_depth
 
-  # Execution scale.
-  gpus: "0"
-  max-parallel: 1
-  max-eval-samples: 2
-  eval-sample-start: 0
+  benchmark:
+    enabled: true
+    mode: opv2v_benchmark_a_profile
+    python_bin: /home/qqxluca/miniconda3/envs/heal/bin/python
+    note: refactor_phase1_smoke
+    inputs:
+      model_dir: /home/qqxluca/HEAL_benchmark_20260422/opencood/fusion/checkpoints/opv2v_camera_v2xvit_full_prope
+      test_dir: /data2/OPV2V/test
+      depth_root: /data2/opv2v_depth/test
+    execution:
+      gpus: "0"
+      max_parallel: 1
+      launch_delay_sec: 0.2
+      poll_sec: 2.0
+      abort_on_failure: true
+    sweep:
+      noises: [0, 1]
+      core_noises: [0]
+      oracle_anchor_noise: 1
+      methods: [v2xregpp]
+      bounds: [baseline, single, oracle]
+    inference:
+      fusion_method: intermediate
+      save_vis_interval: 0
+      num_workers: 0
+      max_eval_samples: 2
+      eval_sample_start: 0
+      comm_range: 70.0
+      comm_range_gating: clean
+      pose_device: cuda
+      force_pose_confidence: 1.0
+      log_interval: 1
 
-  # Benchmark A settings.
-  noises: [0, 1]
-  core-noises: [0]
-  oracle-anchor-noise: 1
-  methods: v2xregpp
-  bounds: baseline,single,oracle
+  registration:
+    enabled: false
+    mode: skip
 
-  # Runtime options.
-  comm-range: 70.0
-  force-pose-confidence: 1.0
-  save-vis-interval: 0
-  num-workers: 0
-  log-interval: 1
-  launch-delay-sec: 0.2
-  poll-sec: 2.0
-  note: refactor_phase1_smoke
+  fusion:
+    enabled: false
+    mode: skip
+
+  evaluation:
+    enabled: true
+    mode: collect_existing_artifacts
+    include_stage_output_dirs: true
+    search_roots: []
+    patterns:
+      - AP030507_*.yaml
+      - POSE_SOLVER_ONLY_*.yaml
+      - profile_*.json
+      - benchmark_summary.json

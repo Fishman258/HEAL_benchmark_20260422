@@ -14,7 +14,7 @@ import torch
 from opencood.registration.runtime.pose_provider_runtime import PoseProviderConfig, apply_pose_provider
 import torch.optim as optim
 
-def backup_script(full_path, folders_to_save=["models", "data_utils", "utils", "loss"]):
+def backup_script(full_path, folders_to_save=["detection", "fusion", "registration", "models", "data_utils", "utils", "loss"]):
     target_folder = os.path.join(full_path, 'scripts')
     if not os.path.exists(target_folder):
         if not os.path.exists(target_folder):
@@ -212,8 +212,22 @@ def create_model(hypes):
     backbone_name = hypes['model']['core_method']
     backbone_config = hypes['model']['args']
 
-    model_filename = "opencood.models." + backbone_name
-    model_lib = importlib.import_module(model_filename)
+    model_candidates = [
+        "opencood.fusion.models." + backbone_name,
+        "opencood.detection.models." + backbone_name,
+        "opencood.models." + backbone_name,
+    ]
+    model_filename = ""
+    last_error = None
+    for candidate in model_candidates:
+        try:
+            model_lib = importlib.import_module(candidate)
+            model_filename = candidate
+            break
+        except ModuleNotFoundError as exc:
+            last_error = exc
+    else:
+        raise last_error or ModuleNotFoundError(backbone_name)
     model = None
     target_model_name = backbone_name.replace('_', '')
 

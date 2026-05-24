@@ -11,7 +11,7 @@ from opencood.utils.camera_utils import bin_depths
 from opencood.models.sub_modules.torch_transformation_utils import \
     warp_affine_simple
 from opencood.utils.transformation_utils import normalize_pairwise_tfm
-from opencood.models.fuse_modules.fusion_in_one import \
+from opencood.fusion.modules.fusion_in_one import \
     MaxFusion, AttFusion, V2VNetFusion, V2XViTFusion, DiscoFusion
 
 class Up(nn.Module):

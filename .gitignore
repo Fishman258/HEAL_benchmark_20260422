@@ -20,6 +20,17 @@ opencood/logs/
 data/
 dataset/
 
+# Local checkpoint copies used to make this workspace runnable without external
+# checkpoint directories. Keep weights out of git; track small config metadata.
+!opencood/detection/checkpoints/
+!opencood/detection/checkpoints/**
+opencood/detection/checkpoints/**/*.pth
+opencood/detection/checkpoints/**/*.pt
+!opencood/fusion/checkpoints/
+!opencood/fusion/checkpoints/**
+opencood/fusion/checkpoints/**/*.pth
+opencood/fusion/checkpoints/**/*.pt
+
 # Experiment/runtime noise.
 *.log
 *.jsonl

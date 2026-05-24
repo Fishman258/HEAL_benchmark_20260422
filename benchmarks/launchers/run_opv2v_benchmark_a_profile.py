@@ -21,9 +21,7 @@ INFERENCE_SCRIPT = ROOT / "opencood" / "tools" / "inference_w_noise.py"
 OUTPUT_ROOT = ROOT / "outputs" / "opv2v_benchmark_a_profile"
 
 DEFAULT_PYTHON = Path("/home/qqxluca/miniconda3/envs/heal/bin/python")
-DEFAULT_MODEL_DIR = Path(
-    "/home/qqxluca/projects/v2xreg_private/HEAL/opencood/logs/opv2v_camera_v2xvit_full_prope"
-)
+DEFAULT_MODEL_DIR = ROOT / "opencood" / "fusion" / "checkpoints" / "opv2v_camera_v2xvit_full_prope"
 DEFAULT_STAGE1 = Path(
     "/home/qqxluca/HEAL_benchmark_20260422/outputs/image_depth_stage1_cache/run_20260513_191711_opv2v_image_depth_camera_model_fullprope_full2170/test/stage1_boxes_image_depth_camera_model.json"
 )

@@ -27,18 +27,24 @@ datasets:
 
 checkpoints:
   opv2v_camera_v2xvit_full_prope:
-    path: /home/qqxluca/projects/v2xreg_private/HEAL/opencood/logs/opv2v_camera_v2xvit_full_prope
-    location: external
-    purpose: Model directory used by latest OPV2V camera benchmark.
-    note: Verify that a loadable net_epoch*.pth exists at the model_dir level before full runs.
+    fusion_path: /home/qqxluca/HEAL_benchmark_20260422/opencood/fusion/checkpoints/opv2v_camera_v2xvit_full_prope
+    detection_path: /home/qqxluca/HEAL_benchmark_20260422/opencood/detection/checkpoints/opv2v_camera_v2xvit_full_prope
+    source_config: /home/qqxluca/projects/v2xreg_private/HEAL/opencood/logs/opv2v_camera_v2xvit_full_prope/config.yaml
+    source_checkpoint: /home/qqxluca/projects/v2xreg_private/HEAL/opencood/logs/_hf/net_epoch_bestval_at21.pth
+    location: project_ignored
+    checkpoint_file: net_epoch_bestval_at21.pth
+    purpose: OPV2V camera-depth detector and fusion model directory used by latest OPV2V camera benchmark.
   dair_lidar_v2xvit:
     path: /home/qqxluca/HEAL_benchmark_20260422/opencood/logs/HeterBaseline_DAIR_lidar_v2xvit_2023_09_09_11_19_26
     location: project_ignored
     purpose: DAIR lidar V2X-ViT checkpoint/config.
   pubmap_pointpillar:
-    path: /data2/pubmap_full_training/logs/pubmap_full_heal_pointpillar_2026_05_08_16_08_40
-    location: external
-    purpose: PubMap PointPillar model directory.
+    fusion_path: /home/qqxluca/HEAL_benchmark_20260422/opencood/fusion/checkpoints/pubmap_full_heal_pointpillar_2026_05_08_16_08_40
+    detection_path: /home/qqxluca/HEAL_benchmark_20260422/opencood/detection/checkpoints/pubmap_full_heal_pointpillar_2026_05_08_16_08_40
+    source_path: /data2/pubmap_full_training/logs/pubmap_full_heal_pointpillar_2026_05_08_16_08_40
+    location: project_ignored
+    checkpoint_file: net_epoch_bestval_at51.pth
+    purpose: PubMap PointPillar detector and benchmark model directory.
 
 stage1_cache:
   opv2v_image_depth_camera_full2170:
@@ -57,4 +63,3 @@ stage1_cache:
     location: external
     modality: lidar
     purpose: PubMap paired OPV2V benchmark stage1 boxes.
-

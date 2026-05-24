@@ -21,7 +21,8 @@ import opencood.hypes_yaml.yaml_utils as yaml_utils
 from opencood.utils.path_utils import resolve_repo_path
 from opencood.registration.runtime.selection_policy import normalize_pose_selection_policy
 from opencood.registration.runtime import build_pose_corrector, run_pose_solver
-from opencood.tools import train_utils, inference_utils
+from opencood.tools import train_utils
+from opencood.fusion import inference_utils
 from opencood.data_utils.datasets import build_dataset
 from opencood.utils import eval_utils
 from opencood.utils.common_utils import read_json

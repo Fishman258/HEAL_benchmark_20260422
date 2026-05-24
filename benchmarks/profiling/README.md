@@ -5,7 +5,7 @@ centralized in:
 
 - `benchmarks/profiling/opv2v_benchmark_a.py`
 
-The launcher `benchmarks/launchers/run_opv2v_benchmark_a_profile.py` owns job
+The pipeline stage `benchmarks/pipelines/benchmark_stage.py` owns job
 construction and process execution, then calls this module to write:
 
 - `profile_rows.csv`

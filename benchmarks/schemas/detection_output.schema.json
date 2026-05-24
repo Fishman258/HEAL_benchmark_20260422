@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "detection_output.schema.json",
+  "title": "Detection Stage Output",
+  "type": "object",
+  "required": ["stage1_result"],
+  "properties": {
+    "stage1_result": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Path to the stage1 cache consumed by registration."
+    },
+    "exists": {
+      "type": "boolean"
+    },
+    "sample_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "detector": {
+      "type": "string"
+    },
+    "modality": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

@@ -14,7 +14,7 @@ import torch
 from torch.nn.functional import sigmoid
 import torch.nn.functional as F
 
-from opencood.data_utils.post_processor.base_postprocessor \
+from opencood.detection.postprocessing.base_postprocessor \
     import BasePostprocessor
 from opencood.utils import box_utils
 from opencood.utils.box_overlaps import bbox_overlaps

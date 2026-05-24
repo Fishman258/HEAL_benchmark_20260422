@@ -8,7 +8,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from opencood.data_utils.post_processor.voxel_postprocessor \
+from opencood.detection.postprocessing.voxel_postprocessor \
     import VoxelPostprocessor
 from opencood.utils import box_utils
 

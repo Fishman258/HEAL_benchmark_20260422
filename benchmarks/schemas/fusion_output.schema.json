@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "fusion_output.schema.json",
+  "title": "Fusion Stage Output",
+  "type": "object",
+  "properties": {
+    "pose_override_path": {
+      "type": "string",
+      "description": "Registration output consumed by the fusion run."
+    },
+    "prediction_path": {
+      "type": "string",
+      "description": "Optional path to serialized fused predictions."
+    },
+    "metric_path": {
+      "type": "string",
+      "description": "Optional path to AP/timing/communication metrics."
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": true
+}

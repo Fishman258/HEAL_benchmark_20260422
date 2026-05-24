@@ -1,0 +1,268 @@
+add_data_extension:
+- bev_visibility.png
+cav_lidar_range: &id002
+- -51.2
+- -51.2
+- -3
+- 51.2
+- 51.2
+- 1
+comm_range: 70
+data_augment:
+- ALONG_AXIS_LIST:
+  - x
+  NAME: random_world_flip
+- NAME: random_world_rotation
+  WORLD_ROT_ANGLE:
+  - -0.78539816
+  - 0.78539816
+- NAME: random_world_scaling
+  WORLD_SCALE_RANGE:
+  - 0.95
+  - 1.05
+fusion:
+  args:
+    data_aug_conf: None
+    grid_conf: None
+    proj_first: false
+  core_method: intermediateheter
+  dataset: opv2v
+heter:
+  assignment_path: opencood/logs/heter_modality_assign/opv2v_4modality.json
+  ego_modality: m2
+  mapping_dict:
+    m1: m2
+    m2: m2
+    m3: m2
+    m4: m2
+  modality_setting:
+    m2:
+      core_method: lift_splat_shoot
+      data_aug_conf: &id004
+        H: 600
+        Ncams: 4
+        W: 800
+        bot_pct_lim:
+        - 0.0
+        - 0.05
+        cams:
+        - camera0
+        - camera1
+        - camera2
+        - camera3
+        final_dim:
+        - 384
+        - 512
+        rand_flip: false
+        resize_lim:
+        - 0.65
+        - 0.7
+        rot_lim:
+        - -3.6
+        - 3.6
+      grid_conf: &id003
+        ddiscr:
+        - 2
+        - 50
+        - 48
+        mode: LID
+        xbound:
+        - -51.2
+        - 51.2
+        - 0.4
+        ybound:
+        - -51.2
+        - 51.2
+        - 0.4
+        zbound:
+        - -10
+        - 10
+        - 20.0
+      sensor_type: camera
+input_source:
+- camera
+- depth
+label_type: camera
+loss:
+  args:
+    cls:
+      alpha: 0.25
+      gamma: 2.0
+      type: SigmoidFocalLoss
+      weight: 1.0
+    depth:
+      weight: 1.0
+    dir:
+      args: &id001
+        anchor_yaw: &id005
+        - 0
+        - 90
+        dir_offset: 0.7853
+        num_bins: 2
+      type: WeightedSoftmaxClassificationLoss
+      weight: 0.2
+    pos_cls_weight: 2.0
+    reg:
+      codewise: true
+      sigma: 3.0
+      type: WeightedSmoothL1Loss
+      weight: 2.0
+  core_method: point_pillar_depth_loss
+lr_scheduler:
+  core_method: multistep
+  gamma: 0.1
+  step_size:
+  - 10
+  - 25
+model:
+  args:
+    anchor_number: 2
+    dir_args: *id001
+    ego_modality: m2
+    fusion_method: v2xvit
+    in_head: 256
+    lidar_range: *id002
+    m2:
+      backbone_args:
+        inplanes: 128
+        layer_nums:
+        - 3
+        - 5
+        - 8
+        layer_strides:
+        - 2
+        - 2
+        - 2
+        num_filters:
+        - 64
+        - 128
+        - 256
+        num_upsample_filter:
+        - 128
+        - 128
+        - 128
+        upsample_strides:
+        - 1
+        - 2
+        - 4
+      camera_mask_args:
+        cav_lidar_range: *id002
+        grid_conf: *id003
+      core_method: lift_splat_shoot
+      encoder_args:
+        anchor_number: 2
+        camera_encoder: EfficientNet
+        data_aug_conf: *id004
+        depth_supervision: true
+        grid_conf: *id003
+        img_downsample: 8
+        img_features: 128
+        use_depth_gt: false
+      sensor_type: camera
+      shrink_header:
+        dim:
+        - 256
+        input_dim: 384
+        kernal_size:
+        - 3
+        padding:
+        - 1
+        stride:
+        - 2
+    v2xvit:
+      transformer:
+        encoder:
+          RTE_ratio: 0
+          cav_att_config:
+            RTE_ratio: 0
+            dim: 256
+            dim_head: 32
+            dropout: 0.3
+            heads: 8
+            use_RTE: false
+            use_hetero: true
+          depth: 3
+          feed_forward:
+            dropout: 0.3
+            mlp_dim: 256
+          num_blocks: 1
+          pwindow_att_config:
+            dim: 256
+            dim_head:
+            - 16
+            - 32
+            - 64
+            dropout: 0.3
+            fusion_method: split_attn
+            pos_encoding: prope
+            heads:
+            - 16
+            - 8
+            - 4
+            relative_pos_embedding: true
+            window_size:
+            - 4
+            - 8
+            - 16
+          sttf:
+            downsample_rate: 4
+            voxel_size: &id006
+            - 0.4
+            - 0.4
+            - 4
+          use_RTE: false
+          use_roi_mask: true
+  core_method: heter_model_baseline
+name: HeterBaseline_opv2v_camera_v2xvit
+noise_setting: !!python/object/apply:collections.OrderedDict
+- - - add_noise
+    - false
+optimizer:
+  args:
+    eps: 1.0e-10
+    weight_decay: 0.0001
+  core_method: Adam
+  lr: 0.002
+postprocess:
+  anchor_args:
+    D: 1
+    H: 256
+    W: 256
+    cav_lidar_range: *id002
+    feature_stride: 4
+    h: 1.56
+    l: 3.9
+    num: 2
+    r: *id005
+    vd: 4
+    vh: 0.4
+    vw: 0.4
+    w: 1.6
+  core_method: VoxelPostprocessor
+  dir_args: *id001
+  gt_range: *id002
+  max_num: 150
+  nms_thresh: 0.15
+  order: hwl
+  target_args:
+    neg_threshold: 0.45
+    pos_threshold: 0.6
+    score_threshold: 0.2
+preprocess:
+  args:
+    max_points_per_voxel: 1
+    max_voxel_test: 1
+    max_voxel_train: 1
+    voxel_size: *id006
+  cav_lidar_range: *id002
+  core_method: SpVoxelPreprocessor
+root_dir: dataset/OPV2V/train
+test_dir: dataset/OPV2V/test
+train_params:
+  batch_size: 1
+  epoches: 40
+  eval_freq: 2
+  max_cav: 5
+  save_freq: 2
+validate_dir: dataset/OPV2V/validate
+yaml_parser: load_general_params

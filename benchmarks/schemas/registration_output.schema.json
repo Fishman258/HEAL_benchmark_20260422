@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "registration_output.schema.json",
+  "title": "Registration Stage Output",
+  "type": "object",
+  "required": ["pose_override_path"],
+  "properties": {
+    "pose_override_path": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Path to corrected per-CAV poses consumed by fusion."
+    },
+    "stage1_result": {
+      "type": "string",
+      "description": "Detection cache used to estimate the pose overrides."
+    },
+    "sample_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "method": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}

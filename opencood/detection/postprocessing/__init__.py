@@ -2,11 +2,11 @@
 # Author: Runsheng Xu <rxx3386@ucla.edu>
 # License: TDG-Attribution-NonCommercial-NoDistrib
 
-from opencood.data_utils.post_processor.voxel_postprocessor import VoxelPostprocessor
-from opencood.data_utils.post_processor.bev_postprocessor import BevPostprocessor
-from opencood.data_utils.post_processor.ciassd_postprocessor import CiassdPostprocessor
-from opencood.data_utils.post_processor.fpvrcnn_postprocessor import FpvrcnnPostprocessor
-from opencood.data_utils.post_processor.uncertainty_voxel_postprocessor import UncertaintyVoxelPostprocessor
+from opencood.detection.postprocessing.voxel_postprocessor import VoxelPostprocessor
+from opencood.detection.postprocessing.bev_postprocessor import BevPostprocessor
+from opencood.detection.postprocessing.ciassd_postprocessor import CiassdPostprocessor
+from opencood.detection.postprocessing.fpvrcnn_postprocessor import FpvrcnnPostprocessor
+from opencood.detection.postprocessing.uncertainty_voxel_postprocessor import UncertaintyVoxelPostprocessor
 
 __all__ = {
     'VoxelPostprocessor': VoxelPostprocessor,

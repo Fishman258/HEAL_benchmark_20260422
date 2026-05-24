@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "stage_record.schema.json",
+  "title": "Benchmark Stage Record",
+  "type": "object",
+  "required": ["schema_version", "stage", "mode", "status", "output", "result", "inputs"],
+  "properties": {
+    "schema_version": {
+      "const": "benchmark_stage_record_v1"
+    },
+    "stage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "mode": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["completed", "dry_run", "skipped", "failed"]
+    },
+    "output": {
+      "type": "object"
+    },
+    "result": {
+      "type": "object"
+    },
+    "inputs": {
+      "type": "object"
+    },
+    "elapsed_sec": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": true
+}

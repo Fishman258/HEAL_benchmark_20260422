@@ -19,7 +19,7 @@ INFERENCE_SCRIPT = ROOT / "opencood" / "tools" / "inference_w_noise.py"
 OUTPUT_ROOT = ROOT / "outputs" / "pubmap_opv2v_benchmark_ab"
 
 DEFAULT_PYTHON = Path("/home/qqxluca/miniconda3/envs/heal/bin/python")
-DEFAULT_MODEL_DIR = Path("/data2/pubmap_full_training/logs/pubmap_full_heal_pointpillar_2026_05_08_16_08_40")
+DEFAULT_MODEL_DIR = ROOT / "opencood" / "fusion" / "checkpoints" / "pubmap_full_heal_pointpillar_2026_05_08_16_08_40"
 DEFAULT_STAGE1 = Path(
     "/data2/pubmap_full_training/stage1_cache/pubmap_pointpillar_bestval51_paired_local_20260509_041950/test/stage1_boxes.json"
 )

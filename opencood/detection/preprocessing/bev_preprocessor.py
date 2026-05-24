@@ -9,7 +9,7 @@ Convert lidar to bev
 
 import numpy as np
 import torch
-from opencood.data_utils.pre_processor.base_preprocessor import \
+from opencood.detection.preprocessing.base_preprocessor import \
     BasePreprocessor
 
 

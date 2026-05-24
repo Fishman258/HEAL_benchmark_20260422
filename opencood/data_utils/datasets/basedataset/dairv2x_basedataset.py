@@ -21,8 +21,8 @@ from opencood.utils.common_utils import read_json
 from opencood.utils.transformation_utils import tfm_to_pose, rot_and_trans_to_trasnformation_matrix
 from opencood.utils.transformation_utils import veh_side_rot_and_trans_to_trasnformation_matrix
 from opencood.utils.transformation_utils import inf_side_rot_and_trans_to_trasnformation_matrix
-from opencood.data_utils.pre_processor import build_preprocessor
-from opencood.data_utils.post_processor import build_postprocessor
+from opencood.detection.preprocessing import build_preprocessor
+from opencood.detection.postprocessing import build_postprocessor
 
 class DAIRV2XBaseDataset(Dataset):
     def __init__(self, params, visualize, train=True):

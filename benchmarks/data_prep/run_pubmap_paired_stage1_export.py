@@ -14,7 +14,14 @@ import yaml
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_PYTHON = Path("/home/qqxluca/miniconda3/envs/heal/bin/python")
 DEFAULT_BASE_HYPES = Path("/data2/pubmap_full_training/configs/full_heal_pointpillar_framelevel_stage1.yaml")
-DEFAULT_CHECKPOINT = Path("/data2/pubmap_full_training/logs/pubmap_full_heal_pointpillar_2026_05_08_16_08_40/net_epoch_bestval_at51.pth")
+DEFAULT_CHECKPOINT = (
+    ROOT
+    / "opencood"
+    / "detection"
+    / "checkpoints"
+    / "pubmap_full_heal_pointpillar_2026_05_08_16_08_40"
+    / "net_epoch_bestval_at51.pth"
+)
 DEFAULT_PAIRED_DATASET = Path(
     "/data2/pubmap_full_training/paired_benchmark_inputs/latest_pubmap_paired_opv2v/datasets/heal_pointpillar_opv2v_paired/test"
 )

@@ -20,8 +20,8 @@ from opencood.utils.camera_utils import load_camera_data
 from opencood.utils.transformation_utils import x1_to_x2
 from opencood.utils.transformation_utils import x_to_world
 from opencood.utils.transformation_utils import tfm_to_pose
-from opencood.data_utils.pre_processor import build_preprocessor
-from opencood.data_utils.post_processor import build_postprocessor
+from opencood.detection.preprocessing import build_preprocessor
+from opencood.detection.postprocessing import build_postprocessor
 
 class OPV2VBaseDataset(Dataset):
     @staticmethod
